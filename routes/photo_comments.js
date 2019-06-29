@@ -8,9 +8,8 @@ const pool = new Pool({connectionString: connectionString});
 
 router.get('/:photoId', function(req, res, next) {
 const id = req.params.photoId;
-const query = 'select username, text from comments left join users on users.id=comments.user_id where comments.photo_id=$1::int';
+//const query = 'select username, text from comments left join users on users.id=comments.user_id where comments.photo_id=$1::int';
 const query = 'select username, text, filename from comments left join users on users.id=comments.user_id left join photos on photos.id=comments.photo_id where comments.photo_id=$1::int';
-//const query = 'SELECT * FROM relatives WHERE person_id=$1::int';
 const params = [id];
 pool.query(query,params, function(err, result) {
     // If an error occurred...
