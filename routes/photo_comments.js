@@ -20,8 +20,6 @@ pool.query(query,params, function(err, result) {
 
     // Log this to the console for debugging purposes.
     console.log("Back from DB with result:");
-    //res.render('person', { title: result.rows[0].name });
-    //const record=result.rows[0]; 
     const record=result.rows;
     const recordMapped = record.map(row => { 
         var rObj = {};
@@ -29,8 +27,9 @@ pool.query(query,params, function(err, result) {
         rObj['text'] = row.text;
         return rObj;
     });  
-    res.json({comments: recordMapped });
-
+    //res.json({comments: recordMapped });
+    res.render('photo_comments', {comments: recordMapped });
+    
     //res.json({username: [record.father_id, record.mother_id]});
     console.log(result.rows);
 	});    
