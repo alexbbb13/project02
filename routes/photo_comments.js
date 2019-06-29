@@ -23,7 +23,12 @@ pool.query(query,params, function(err, result) {
     //res.render('person', { title: result.rows[0].name });
     //const record=result.rows[0]; 
     const record=result.rows;
-    const recordMapped = record.map(row => row.text);  
+    const recordMapped = record.map(row => { 
+        var rObj = {};
+        rObj['username'] = row.username;
+        rObj['text'] = row.text;
+        return rObj;
+    });  
     res.json({comments: recordMapped });
 
     //res.json({username: [record.father_id, record.mother_id]});
@@ -31,7 +36,5 @@ pool.query(query,params, function(err, result) {
 	});    
   
 });
-
-
 
 module.exports = router;
