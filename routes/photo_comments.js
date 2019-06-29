@@ -23,7 +23,7 @@ pool.query(query,params, function(err, result) {
     //res.render('person', { title: result.rows[0].name });
     //const record=result.rows[0]; 
     const record=result.rows;
-    const recordMapped = record.map(row => {username: row.username, text:row.text})  
+    const recordMapped = record.map(row => row.text);  
     res.json({comments: recordMapped });
 
     //res.json({username: [record.father_id, record.mother_id]});
