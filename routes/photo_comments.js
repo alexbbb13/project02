@@ -19,15 +19,17 @@ pool.query(query,params, function(err, result) {
     }
 
     const record=result.rows;
-    const recordMapped = record.map(row => { 
-        const rObj = {};
-        rObj['username'] = row.username;
-        rObj['text'] = row.text;
-        return rObj;
-    });  
-    //res.json({comments: recordMapped });
-    res.render('photo_comments', {comments: recordMapped, filename: record[0].filename });
+    if(record.length > 0) {
+            const recordMapped = record.map(row => { 
+                const rObj = {};
+                rObj['username'] = row.username;
+                rObj['text'] = row.text;
+                return rObj;});  
+            //res.json({comments: recordMapped });
+            res.render('photo_comments', {comments: recordMapped, filename: record[0].filename });
+        }
     });    
+    
   
 });
 
