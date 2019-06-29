@@ -6,10 +6,7 @@ var logger = require('morgan');
 var PORT = process.env.PORT || 3000;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var personRouter = require('./routes/person');
-var parentsRouter = require('./routes/parents');
-var childrenRouter = require('./routes/children');
+var commentsRouter = require('./routes/photo_comments');
 
 var app = express();
 
@@ -24,9 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/person', personRouter);
-app.use('/parents', parentsRouter);
-app.use('/children', childrenRouter);
+app.use('/photo_comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
