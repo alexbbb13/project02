@@ -27,6 +27,8 @@ pool.query(query,params, function(err, result) {
                 return rObj;});  
             //res.json({comments: recordMapped });
             res.render('photo_comments', {comments: recordMapped, filename: record[0].filename });
+        } else {
+            res.render('error', {message: 'No data'});
         }
     });    
     
