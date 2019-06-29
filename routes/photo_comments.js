@@ -28,7 +28,7 @@ pool.query(query,params, function(err, result) {
             //res.json({comments: recordMapped });
             res.render('photo_comments', {comments: recordMapped, filename: record[0].filename });
         } else {
-            res.render('error', {message: 'No data'});
+            res.render('error', {message: 'No data', error: {status : '', stack : ''}});
         }
     });    
     
