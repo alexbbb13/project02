@@ -35,9 +35,10 @@ pool.query(query,params, function(err, result) {
 
 router.post('/:photoId', function(req, res, next) {
     const photoId = req.params.photoId;
-    const comment = req.query.comment;
+    const comment = req.body.comment;
+    console.log("Comment="+comment);
     const userId = 1; //@TODO get user id from session
-    const query = 'INSERT INTO comments (user_id, photo_id, text) VALUES ($1::int,$2::int,$3::string)';
+    const query = 'INSERT INTO comments (user_id, photo_id, text) VALUES ($1::int, $2::int, $3::string)';
     const params = [userId, photoId, comment];
     pool.query(query,params, function(err, result) {
     // If an error occurred...
