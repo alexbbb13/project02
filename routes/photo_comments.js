@@ -45,7 +45,7 @@ router.post('/:photoId', function(req, res, next) {
             console.log("Error in query: ")
             console.log(err);
         }
-        res.redirect('/' + photoId);
+        res.redirect('/photo_comments/' + photoId);
     });
 });
 
