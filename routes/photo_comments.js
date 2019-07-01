@@ -34,18 +34,18 @@ pool.query(query,params, function(err, result) {
 });
 
 router.post('/:photoId', function(req, res, next) {
-    const id = req.params.photoId;
+    const photoId = req.params.photoId;
     const comment = req.query.comment;
     const userId = 1; //@TODO get user id from session
     const query = 'INSERT INTO comments (user_id, photo_id, text) VALUES ($1::int,$2::int,$3::string)';
-    const params = [userId, photoId, comment``];
+    const params = [userId, photoId, comment];
     pool.query(query,params, function(err, result) {
     // If an error occurred...
         if (err) {
             console.log("Error in query: ")
             console.log(err);
         }
-        res.redirect('/' + id);
+        res.redirect('/' + photoId);
     });
 });
 
