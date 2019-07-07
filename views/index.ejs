@@ -6,6 +6,10 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>Welcome, <%= userName %></p>
+    <br>
+    <form action="/upload" method="GET">
+    <input type="submit" value="Upload new photo">
+    </form>
   </body>
 </html>
