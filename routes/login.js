@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 
 const { Pool } = require('pg');
@@ -63,7 +64,11 @@ const params = [login];
 
 //Add new user
 
-router.post('/newuser', function(req, res, next) {
+router.post('/newuser', [
+  check('username').isLength({ min: 3 }).trim().escape(),
+  check('login').isLength({ min: 3 }).trim().escape(),
+  check('password').isLength({ min: 3 }).trim().escape()
+],function(req, res, next) {
     const username = req.body.username;
     const login = req.body.login;
     const password = req.body.password;

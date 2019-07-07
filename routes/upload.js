@@ -17,7 +17,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	if (req.session) {
 		const userId = req.session.userId;
-		const userName = req.session.userName;		
+		const userName = req.session.userName;
+		
 	} else {
 		res.redirect('/login');	
 	}   

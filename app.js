@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const { body } = require('express-validator');
+const { sanitizeBody } = require('express-validator');
 var bodyParser = require('body-parser');
 var PORT = process.env.PORT || 3000;
 
@@ -13,6 +15,8 @@ var loginRouter = require('./routes/login');
 var uploadRouter = require('./routes/upload');
 
 var app = express();
+
+app.disable('x-powered-by');  //https://expressjs.com/en/advanced/best-practice-security.html
 
 app.use(function (req, res, next) {
   console.log(req.body) // populated!
@@ -27,12 +31,14 @@ app.set('view engine', 'ejs');
 
 //SESSION SHOULD BE CALLED BEFORE ROUTER 
 //https://stackoverflow.com/questions/39796228/req-session-is-undefined-using-express-session
-const hour = 3600000;
+//https://expressjs.com/en/advanced/best-practice-security.html
+var expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
 app.use(session(
 {
   secret: 'ssshhhhhwq7365417236#12e3@',
   saveUninitialized: true,
-  maxAge: 14 * 24 * hour
+  httpOnly: true,
+  expires: expiryDate
 }));
 
 app.use(logger('dev'));
