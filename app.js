@@ -7,6 +7,7 @@ const session = require('express-session');
 const { body } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 var PORT = process.env.PORT || 3000;
 
 var indexRouter = require('./routes/index');
@@ -22,6 +23,11 @@ app.use(function (req, res, next) {
   console.log(req.body) // populated!
   next();
 })
+
+app.use(fileUpload({
+	useTempFiles : true,
+    tempFileDir : '/tmp/'
+    }));
 
 app.use(bodyParser());
 
