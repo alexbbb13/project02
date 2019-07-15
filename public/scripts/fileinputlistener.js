@@ -30,7 +30,7 @@ function getSignedRequest(file){
 function uploadFile(file, signedRequest, url){
   const xhr = new XMLHttpRequest();
   xhr.open('PUT', signedRequest);
-  xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+  xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://byuiproject02.s3-eu-central-1.amazonaws.com');
   xhr.onreadystatechange = () => {
 
     if(xhr.readyState === 4){
