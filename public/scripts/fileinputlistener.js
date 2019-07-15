@@ -29,8 +29,8 @@ function getSignedRequest(file){
 
 function uploadFile(file, signedRequest, url){
   const xhr = new XMLHttpRequest();
-  xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
   xhr.open('PUT', signedRequest);
+  xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
   xhr.onreadystatechange = () => {
 
     if(xhr.readyState === 4){
@@ -41,7 +41,7 @@ function uploadFile(file, signedRequest, url){
       else{
       	console.log('Error uploading, status ='+ xhr.status);
       	console.log('Error uploading, response ='+ xhr.response);		
-        alert('Could not upload file. Error:'+ xhr.response);
+        alert('Could not upload file. Error:'+ xhr.response.toString());
       }
     }
   };
