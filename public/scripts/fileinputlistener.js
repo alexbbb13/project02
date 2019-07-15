@@ -30,6 +30,7 @@ function getSignedRequest(file){
 function uploadFile(file, signedRequest, url){
   const xhr = new XMLHttpRequest();
   xhr.open('PUT', signedRequest);
+  xhr.setRequestHeader('Origin', 'https://desolate-bastion-64764.herokuapp.com');
   xhr.onreadystatechange = () => {
 
     if(xhr.readyState === 4){
