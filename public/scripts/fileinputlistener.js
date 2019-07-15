@@ -40,7 +40,7 @@ function uploadFile(file, signedRequest, url){
       else{
       	console.log('Error uploading, status ='+ xhr.status);
       	console.log('Error uploading, response ='+ xhr.response);		
-        alert('Could not upload file.');
+        alert('Could not upload file. Error:'+ xhr.response);
       }
     }
   };

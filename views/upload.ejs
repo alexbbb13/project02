@@ -8,16 +8,14 @@
   </head>
   <body>
   	<h2>Upload photo</h2>
-    <img id="preview" src="/images/default.png">
+    <img id="preview" src="/images/img_avatar1.png">
+    <br>
     <input type="file" id="file-input">
   	 <form ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
       method='post' >
         <input type="hidden" id="avatar-url" name="avatar-url" value="">
-        <!--
-        <input type="file" name="upload" />
-      -->
         <input type='submit' value='Upload' />
     </form> 
     <script src='/scripts/fileinputlistener.js'></script>

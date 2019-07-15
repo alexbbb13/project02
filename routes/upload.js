@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 	}   
 });
 
-/* POST upload. */
+/* POST upload. *//*
 router.post('/', function(req, res, next) {
 	if (req.session) {
 		const userId = req.session.userId;
@@ -48,4 +48,6 @@ router.post('/', function(req, res, next) {
 	}   
 	
 });
+
+*/
 module.exports = router;
