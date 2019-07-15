@@ -39,9 +39,8 @@ function uploadFile(file, signedRequest, url){
         document.getElementById('avatar-url').value = url;
       }
       else{
-      	console.log('Error uploading, status ='+ xhr.status);
-      	console.log('Error uploading, response ='+ xhr.response);		
-        alert('Could not upload file. Error:'+ xhr.response.toString());
+      	console.log('response headers: ' + xhr.getAllResponseHeaders());	
+        alert('Could not upload file to AWS S3. Error:'+ xhr.response);
       }
     }
   };
