@@ -3,16 +3,23 @@
   <head>
     <title>Upload</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   </head>
   <body>
   	<h2>Upload photo</h2>
+    <img id="preview" src="/images/default.png">
+    <input type="file" id="file-input">
   	 <form ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
-      method='post' 
-      encType="multipart/form-data">
+      method='post' >
+        <input type="hidden" id="avatar-url" name="avatar-url" value="">
+        <!--
         <input type="file" name="upload" />
-        <input type='submit' value='Upload!' />
+      -->
+        <input type='submit' value='Upload' />
     </form> 
+    <script src='/scripts/fileinputlistener.js'></script>
   </body>
 </html>
