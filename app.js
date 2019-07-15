@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var commentsRouter = require('./routes/photo_comments');
 var loginRouter = require('./routes/login');
 var uploadRouter = require('./routes/upload');
+var signS3Router = require('./routes/sign-s3');
 
 var app = express();
 
@@ -59,6 +60,7 @@ app.use('/login', loginRouter);
 app.use('/login/checkuser', loginRouter);
 app.use('/login/newuser', loginRouter);
 app.use('/upload', uploadRouter);
+app.use('/sign-s3', signS3Router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
