@@ -28,9 +28,9 @@ function getSignedRequest(file){
 }
 
 function uploadFile(file, signedRequest, url){
-  const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest({mozSystem: true});
   xhr.open('PUT', signedRequest);
-  xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://byuiproject02.s3-eu-central-1.amazonaws.com');
+  xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://desolate-bastion-64764.herokuapp.com');
   xhr.onreadystatechange = () => {
 
     if(xhr.readyState === 4){
