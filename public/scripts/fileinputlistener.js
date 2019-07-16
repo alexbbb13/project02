@@ -29,7 +29,7 @@ function getSignedRequest(file){
 
 function uploadFile(file, signedRequest, url){
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', signedRequest);
+  xhr.open('PUT', signedRequest);
   xhr.onreadystatechange = () => {
     console.log('response ready state: ' + xhr.readyState);  
     if(xhr.readyState === 4){
