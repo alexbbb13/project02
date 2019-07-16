@@ -4,7 +4,7 @@ const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const shell = require('shelljs');
 const aws = require('aws-sdk');
-const S3_BUCKET = (process.env.S3_BUCKET||'byuiproject02');
+const S3_BUCKET = (process.env.S3_BUCKET_NAME);
 /*
 Do not forget to set 
 AWS_ACCESS_KEY_ID=
