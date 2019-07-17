@@ -54,38 +54,4 @@ insert into comments (user_id, photo_id, text)
 	(2,2,'Your second Photo #issocool'),
 	(1,3,'Your first Photo #issocool, it rocks!');
 
-/*
-How to setup a local database alongside with Heroku
 
-Install postgres
-create username exactly as $USER (user1)
-CREATE USER user1;
-CREATE DATABASE user1;  should be exactly the same name as user!!!!!!!!!!!!!!!!!!!!!!!
-ALTER USER user1 CREATEDB;
-ALTER USER user1 SET PASSWORD 'password1';
-GRANT ALL ACCESS on user1 to user1;
-
-DATABASE_URL=postgres://user1:password1@localhost
-
-
-
-DATABASE_URL=postgres://burov:burov@localhost:5432/postgres
-
-Scheme:
-postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
-
-postgresql://
-postgresql://localhost
-postgresql://localhost:5432
-postgresql://localhost/mydb
-postgresql://user@localhost
-postgresql://user:secret@localhost
-postgresql://other@localhost/otherdb?connect_timeout=10&application_name=myapp
-postgresql://localhost/mydb?user=other&password=secret
-*/
-
-
-/*
-http://byuiproject02.s3.amazonaws.com/1/flower.jpg
-
-*/

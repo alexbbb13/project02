@@ -1,8 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const shell = require('shelljs');
+const aws = require('aws-sdk');
+const S3_BUCKET = (process.env.S3_BUCKET_NAME);
 
 /* GET upload. */
 router.get('/', function(req, res, next) {
@@ -14,6 +16,43 @@ router.get('/', function(req, res, next) {
 		res.redirect('/login');
 	}   
 });
+
+router.post('/', function(req, res, next) {
+	console.log('starting upload to Amazon S3')
+	const s3 = new aws.S3(
+	{
+
+	//https://stackoverflow.com/questions/26533245/the-authorization-mechanism-you-have-provided-is-not-supported-please-use-aws4
+    endpoint: 's3-eu-central-1.amazonaws.com',
+    signatureVersion: 'v4',
+    region: 'eu-central-1',
+    PathStyle: true
+    /*
+    last error:
+    Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://byuiproject02.s3-eu-central-1.amazonaws.com/flower.jpeg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIQ6TRG75TFDRBLOQ%2F20190715%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20190715T160343Z&X-Amz-Expires=60&X-Amz-Signature=eea4f7c22d256d63388d08943b8b342b2c82ee981544bc4ed8839c80309c3f78&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=public-read. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing).[Learn More]
+     Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://byuiproject02.s3-eu-central-1.amazonaws.com/flower.jpeg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIQ6TRG75TFDRBLOQ%2F20190715%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20190715T160343Z&X-Amz-Expires=60&X-Amz-Signature=eea4f7c22d256d63388d08943b8b342b2c82ee981544bc4ed8839c80309c3f78&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=public-read. (Reason: CORS request did not succeed).[Learn More]
+    */
+	} );
+	const myKey = 'textFile.txt';
+
+
+ 	const params = {Bucket: S3_BUCKET, Key: myKey, Body: 'Valueeee or some data-2' };
+
+     s3.putObject(params, function(err, data) {
+
+         if (err) {
+         	 conseole.log(JSON.stringify(s3));
+             console.log(err)
+
+         } else {
+
+             console.log("Successfully uploaded data to myBucket/myKey");
+
+         }
+
+      });
+});
+
 
 /* POST upload. *//*
 router.post('/', function(req, res, next) {
