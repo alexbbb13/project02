@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
 		const userName = req.session.userName;
 		if (Object.keys(req.files).length == 0) {
     		return res.status(400).send('No files were uploaded.');
-    	} else {
+    		} else {
     		  const sampleFile = req.files.upload;
 			  // Use the mv() method to place the file somewhere on your server
 

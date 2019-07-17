@@ -26,9 +26,8 @@ app.use(function (req, res, next) {
 })
 
 app.use(fileUpload({
-	useTempFiles : true,
-    tempFileDir : '/tmp/'
-    }));
+	useTempFiles : false
+}));
 
 app.use(bodyParser());
 

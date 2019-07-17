@@ -14,10 +14,14 @@
   	 <form ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
-      method='post' >
+      method='post'
+      encType="multipart/form-data" >
         <input type="hidden" id="avatar-url" name="avatar-url" value="">
+        <input type="file" name="uploadedFile">
         <input type='submit' value='Upload' />
     </form> 
+    <!--
     <script src='/scripts/fileinputlistener.js'></script>
+  -->
   </body>
 </html>
