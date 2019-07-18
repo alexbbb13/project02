@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const s3helper = require('./s3helper');
 const app = express();
 var multer  = require('multer');
 var storage = multer.memoryStorage();
@@ -46,6 +47,7 @@ router.post('/', function(req, res, next) {
     		} else {
 
 			  console.log('starting upload to Multer');
+
 			  upload(req, res, function (err) {
 			    if (err instanceof multer.MulterError) {
 			      // A Multer error occurred when uploading.
@@ -57,17 +59,13 @@ router.post('/', function(req, res, next) {
 			    // Everything went fine.
 	  	    	    console.log('starting upload to Amazon S3')
 	
-					
-
-					// Without this I get a 0 byte object
-					//https://github.com/aws/aws-sdk-js/issues/1713
-					//?????????????	
-					const buffer = req.files.uploadedFile.data;
 					const filename = req.files.uploadedFile.name;
 					
 					const myKey = userId + '/' + filename;
-					//buffer.pause();
-
+					s3helper.writeFile(userId, filename, req.files.uploadedFile.data)
+						.then((message) => {res.status(200).send(message);})
+						.catch((err) => {res.status(400).send(err);});
+					/*
 					const params = {
 				 		Bucket: S3_BUCKET,
 				 	 	Key: myKey, 
@@ -85,49 +83,13 @@ router.post('/', function(req, res, next) {
 			             return res.status(200).send('Successfully uploaded data to myBucket/myKey');
 			         }
 			     	});
+			     	*/
   				});
     		  // Callback hell @TODO refactor to promises
-			 
     	}
 	} else {
 		res.redirect('/login');	
 	} 
 });
 
-
-/* POST upload. *//*
-router.post('/', function(req, res, next) {
-	if (req.session) {
-		const userId = req.session.userId;
-		const userName = req.session.userName;
-		if (Object.keys(req.files).length == 0) {
-    		return res.status(400).send('No files were uploaded.');
-    	} else {
-    		  const sampleFile = req.files.upload;
-			  // Use the mv() method to place the file somewhere on your server
-			  const fileDir = '/uploads/'+userId+'/';
-			  const fileName = 'filename.png';  
-			  const fs = require("fs"); // Or `import fs from "fs";` with ESM
-			  const fullPath = fileDir + fileName;
-				if (fs.existsSync(fileDir)) {
-				    //Path exists
-				} else {
-					//Create path
-					shell.mkdir('-p', fileDir);
-				}
-			  
-			  sampleFile.mv(fullPath, function(err) {
-			    if (err) return res.status(500).send(err);
-                //@TODO Write to database 
-			    res.send('File uploaded!');
-  				});
-    	}
-
-	} else {
-		res.redirect('/login');	
-	}   
-	
-});
-
-*/
 module.exports = router;
