@@ -4,7 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "inspect": "node --inspect app.js"
   },
   "dependencies": {
     "aws-sdk": "^2.493.0",

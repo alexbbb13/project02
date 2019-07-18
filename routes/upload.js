@@ -57,13 +57,21 @@ router.post('/', function(req, res, next) {
 			    // Everything went fine.
 	  	    	    console.log('starting upload to Amazon S3')
 	
-					const myKey = 'pngFile.png';
+					
 
-					console.log(req);
-				 	const params = {
+					// Without this I get a 0 byte object
+					//https://github.com/aws/aws-sdk-js/issues/1713
+					//?????????????	
+					const buffer = req.files.uploadedFile.data;
+					const filename = req.files.uploadedFile.name;
+					
+					const myKey = userId + '/' + filename;
+					//buffer.pause();
+
+					const params = {
 				 		Bucket: S3_BUCKET,
 				 	 	Key: myKey, 
-				 	 	Body: req.files.uploadedFile.buffer,
+				 	 	Body: buffer,
 				 	 	ContentType: 'application/octet-stream'
 				 	 	};
 
