@@ -25,8 +25,8 @@ pool.query(query,params, function(err, result) {
                 rObj['username'] = row.username;
                 rObj['text'] = row.text;
                 return rObj;});  
-            //res.json({comments: recordMapped });
-            res.render('photo_comments', {comments: recordMapped, filename: record[0].filename, photoId: id });
+            const src = 'https://byuiproject03.s3.eu-central-1.amazonaws.com/3/flower.jpeg';
+            res.render('photo_comments', {comments: recordMapped, filename: record[0].filename, photoId: id, src: src });
         } else {
             res.render('error', {message: 'No data', error: {status : '', stack : ''}});
         }
