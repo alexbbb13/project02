@@ -69,9 +69,10 @@ router.post('/', function(req, res, next) {
 							.then((fileId) => { dbHelper.writeFileIdToDb(userId, fileId)
 								.then(
 									() => {
-										alert("Success");
-										res.redirect('/upload');
-									    //res.status(200).send("write to db success");
+										//alert("Success");
+										//res.status(200).send("Success"); DOES NOT WORK
+										//res.redirect('/upload');
+									    res.status(200).send("Successfully uploaded");
 										}
 									)
 								.catch((err) => { res.status(500).send(err);})	
