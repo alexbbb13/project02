@@ -3,6 +3,7 @@ const router = express.Router();
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const s3helper = require('./s3helper');
+const dbHelper = require('./dbHelper');
 const app = express();
 var multer  = require('multer');
 var storage = multer.memoryStorage();
@@ -39,7 +40,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	if (req.session) {
+	if (req.session && req.session.userId) {
 		const userId = req.session.userId;
 		const userName = req.session.userName;
 		if (Object.keys(req.files).length == 0) {
@@ -49,7 +50,7 @@ router.post('/', function(req, res, next) {
 			  console.log('starting upload to Multer');
 
 			  upload(req, res, function (err) {
-			    if (err instanceof multer.MulterError) {
+			    if (err instanceof multer.MulterError) {app.use('/sign-s3', signS3Router);
 			      // A Multer error occurred when uploading.
 			       res.status(400).send(err);
 			    } else if (err) {
@@ -63,29 +64,16 @@ router.post('/', function(req, res, next) {
 					
 					const myKey = userId + '/' + filename;
 					s3helper.writeFile(userId, filename, req.files.uploadedFile.data)
-						.then((message) => {res.status(200).send(message);})
-						.catch((err) => {res.status(400).send(err);});
-					/*
-					const params = {
-				 		Bucket: S3_BUCKET,
-				 	 	Key: myKey, 
-				 	 	Body: buffer,
-				 	 	ContentType: 'application/octet-stream'
-				 	 	};
-
-				     s3.putObject(params, function(err, data) {
-
-			         if (err) {
-			         	 console.log(err)
-			             res.status(400).send(err);	
-			         	} else {
-			             console.log("Successfully uploaded data to myBucket/myKey");
-			             return res.status(200).send('Successfully uploaded data to myBucket/myKey');
-			         }
-			     	});
-			     	*/
+						.then((message) => {
+							dbHelper.writeFileToDb(filename)
+							.then((fileId) => { dbHelper.writeFileIdToDb(userId, fileId)
+								.then(res.status(200).send("write to db success"))
+								.catch((err) => { res.status(500).send(err);})	
+							})
+							.catch((err) => { res.status(500).send(err);})
+						})
+						.catch((err) => {res.status(500).send(err);});
   				});
-    		  // Callback hell @TODO refactor to promises
     	}
 	} else {
 		res.redirect('/login');	
