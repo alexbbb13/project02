@@ -4,20 +4,40 @@
     <title>Upload</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+       function previewFile(){
+           var preview = document.getElementById('preview'); //selects the query named img
+           var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+           var reader  = new FileReader();
 
+           reader.onloadend = function () {
+               preview.src = reader.result;
+           }
+
+           if (file) {
+               reader.readAsDataURL(file); //reads the data as a URL
+           } else {
+               preview.src = "";
+           }
+    }
+    previewFile();  //calls the function named previewFile()
+  </script>
   </head>
   <body>
   	<h2>Upload photo</h2>
     <img id="preview" src="/images/img_avatar1.png">
     <br>
-    <input type="file" id="file-input">
-  	 <form ref='uploadForm' 
+    <br>
+     <form ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
-      method='post' >
-        <input type="hidden" id="avatar-url" name="avatar-url" value="">
+      method='post'
+      encType="multipart/form-data" >
+        <input type="file" name="uploadedFile" onchange="previewFile()">
         <input type='submit' value='Upload' />
     </form> 
+    <!--
     <script src='/scripts/fileinputlistener.js'></script>
+  -->
   </body>
 </html>
