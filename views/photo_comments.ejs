@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Comments</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<head>
+    <title>Photo</title>
+     <% include ../partials/header.ejs %>
   </head>
   <body>
-  	<h3>File:<%= filename %></h3>
+     <% include ../partials/navbar_registered.ejs %>
+  <div class="jumbotron text-center">
+   <div class="container">
+
   	<img src="<%= src %>" alt="<%= filename %>"></img>  
   	<br>
+
+
+  	<div class="container-fluid">
+  	<div class="media">
+	  <img class="mr-3" src="/images/avatar_icon.png" alt="Generic placeholder image">
+	  <div class="media-body">
+	    <h5 class="mt-0">Media heading</h5>
+	    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+	  </div>
+	</div>
+   </div>
+  </div>
+
 	<table>
 	   <tr>
 	      <th>User</th><th>Comment</th>
@@ -21,10 +37,16 @@
 	   <% } %>
 	</table>
 	<br>
+	 <div class="row row-fluid">
+      <div class="col-sm-4">
+      <div class="form-group">
 	<form action="/photo_comments/<%= photoId %>" method="POST">
-  		<input type="textarea" name="comment" rows="3" cols="80">
+  		<input type="textarea" class="form-control" name="comment" rows="3" cols="80">
   		<br>
-  	<input type="submit" value="Add comment">
-	</form> 
+  	<input type="submit" class= "btn button-primary" value="Add comment">
+	</form>
+	</div>
+	</div>
+	</div> 
   </body>
 </html>

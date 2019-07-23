@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Upload</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
+ <head>
+    <title>Add New Photo</title>
+     <% include ../partials/header.ejs %>
+     <script>
        function previewFile(){
            var preview = document.getElementById('preview'); //selects the query named img
            var file    = document.querySelector('input[type=file]').files[0]; //sames as here
@@ -24,20 +22,29 @@
   </script>
   </head>
   <body>
-  	<h2>Upload photo</h2>
+     <% include ../partials/navbar_registered.ejs %>
+  <div class="jumbotron text-center">
+   <div class="container">
+  
+   	<h2>Upload photo</h2>
     <img id="preview" src="/images/img_avatar1.png">
     <br>
     <br>
+     <div class="row row-fluid">
+      <div class="col-sm-4">
+      <div class="form-group">
      <form ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
       method='post'
       encType="multipart/form-data" >
         <input type="file" name="uploadedFile" onchange="previewFile()">
-        <input type='submit' value='Upload' />
+        <input type='submit' class="btn btn-primary" value='Upload' />
     </form> 
-    <!--
-    <script src='/scripts/fileinputlistener.js'></script>
-  -->
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
   </body>
 </html>

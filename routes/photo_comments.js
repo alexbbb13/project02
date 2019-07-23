@@ -10,6 +10,7 @@ const dbHelper = require('./dbHelper.js');
 router.get('/:photoId', function(req, res, next) {
 const session = require('express-session');
 const photoId = req.params.photoId;
+const userName = req.session.userName;
 const query = 'select username, text, filename from comments left join users on users.id=comments.user_id left join photos on photos.id=comments.photo_id where comments.photo_id=$1::int';
 const params = [photoId];
 
@@ -33,9 +34,9 @@ dbHelper.getUserIdFilename(photoId)
                                         rObj['text'] = row.text;
                                         return rObj;});
                                    
-                                    res.render('photo_comments', {comments: recordMapped, filename: result.filename, photoId: photoId, src: srcFileName });
+                                    res.render('photo_comments', {comments: recordMapped, filename: result.filename, photoId: photoId, src: srcFileName, userName:userName });
                                 } else {
-                                    res.render('photo_comments', {comments: [], filename: result.filename, photoId: photoId, src: srcFileName });
+                                    res.render('photo_comments', {comments: [], filename: result.filename, photoId: photoId, src: srcFileName, userName:userName  });
                                     //res.render('error', {message: 'No data', error: {status : '', stack : ''}});
                                 }
                             });    

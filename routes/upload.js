@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 	if (req.session) {
 		const userId = req.session.userId;
 		const userName = req.session.userName;
-		res.render('upload', {});		
+		res.render('upload', {userName:userName});		
 	} else {
 		res.redirect('/login');
 	}   
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 		const userId = req.session.userId;
 		const userName = req.session.userName;
 		if (Object.keys(req.files).length == 0) {
-    		return res.status(400).send('No files were uploaded.');
+    		     return res.status(400).send('No files were uploaded.');
     		} else {
 
 			  console.log('starting upload to Multer');
@@ -69,10 +69,7 @@ router.post('/', function(req, res, next) {
 							.then((fileId) => { dbHelper.writeFileIdToDb(userId, fileId)
 								.then(
 									() => {
-										//alert("Success");
-										//res.status(200).send("Success"); DOES NOT WORK
-										//res.redirect('/upload');
-									    res.status(200).send("Successfully uploaded");
+							    			return res.redirect('/myphotos');
 										}
 									)
 								.catch((err) => { res.status(500).send(err);})	
@@ -83,7 +80,7 @@ router.post('/', function(req, res, next) {
   				});
     	}
 	} else {
-		res.redirect('/login');	
+		return res.redirect('/login');	
 	} 
 });
 
