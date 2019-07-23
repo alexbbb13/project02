@@ -11,7 +11,7 @@ router.get('/:photoId', function(req, res, next) {
 const session = require('express-session');
 const photoId = req.params.photoId;
 const userName = req.session.userName;
-const query = 'select username, text, filename from comments left join users on users.id=comments.user_id left join photos on photos.id=comments.photo_id where comments.photo_id=$1::int';
+const query = 'select username, text, filename, comments.user_id as user_id from comments left join users on users.id=comments.user_id left join photos on photos.id=comments.photo_id where comments.photo_id=$1::int';
 const params = [photoId];
 
 dbHelper.getUserIdFilename(photoId)
@@ -31,6 +31,7 @@ dbHelper.getUserIdFilename(photoId)
                                     const recordMapped = record.map(row => { 
                                         const rObj = {};
                                         rObj['username'] = row.username;
+                                        rObj['userId'] = row.user_id;
                                         rObj['text'] = row.text;
                                         return rObj;});
                                    

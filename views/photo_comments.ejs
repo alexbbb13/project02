@@ -29,7 +29,7 @@
     <div class="media border p-3">
 	    <img src="/images/avatar_icon.png" alt="<%= comments[i].username %>" class="mr-3 mt-3 rounded-circle" style="width:40px;">
 	    <div class="media-body">
-	      <h4><%= comments[i].username %> <small><i></i></small></h4>
+	      <a href="/photos/<%= comments[i].userId %>"><h4><%= comments[i].username %> <small><i></i></small></h4></a>
 	      <p style="color: #000000"><%= comments[i].text %></p>      
 	    </div>
 	  </div>
