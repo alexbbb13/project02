@@ -6,38 +6,14 @@
   </head>
   <body>
      <% include ../partials/navbar_registered.ejs %>
-  <div class="jumbotron text-center">
+
+  <div class="jumbotron">
    <div class="container">
 
-  	<img src="<%= src %>" alt="<%= filename %>"></img>  
+  	<div class ="text-center"> <img class = "text-center" src="<%= src %>" alt="<%= filename %>"></img>  </div>
   	<br>
-
-
-  	<div class="container-fluid">
-  	<div class="media">
-	  <img class="mr-3" src="/images/avatar_icon.png" alt="Generic placeholder image">
-	  <div class="media-body">
-	    <h5 class="mt-0">Media heading</h5>
-	    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-	  </div>
-	</div>
-   </div>
-  </div>
-
-	<table>
-	   <tr>
-	      <th>User</th><th>Comment</th>
-	   </tr>
-
-	   <% for (var i = 0; i < comments.length; i++) { %>
-	    <tr>
-	      <td><%= comments[i].username %></td>
-	      <td><%= comments[i].text %></td>
-	    </tr>    
-	   <% } %>
-	</table>
-	<br>
-	 <div class="row row-fluid">
+  	<br>
+	 <div class="row row-fluid text-center">
       <div class="col-sm-4">
       <div class="form-group">
 	<form action="/photo_comments/<%= photoId %>" method="POST">
@@ -47,6 +23,19 @@
 	</form>
 	</div>
 	</div>
-	</div> 
+	</div>
+	<% for (var i = 0; i < comments.length; i++) { %>
+	<div class="container mt-3">
+    <div class="media border p-3">
+	    <img src="/images/avatar_icon.png" alt="<%= comments[i].username %>" class="mr-3 mt-3 rounded-circle" style="width:40px;">
+	    <div class="media-body">
+	      <h4><%= comments[i].username %> <small><i></i></small></h4>
+	      <p style="color: #000000"><%= comments[i].text %></p>      
+	    </div>
+	  </div>
+	</div>
+	 <% } %>
+
+
   </body>
 </html>
