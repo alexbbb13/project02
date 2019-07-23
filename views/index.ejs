@@ -2,14 +2,23 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <% include ../partials/header.ejs %>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome, <%= userName %></p>
-    <br>
-    <form action="/upload" method="GET">
-    <input type="submit" value="Upload new photo">
-    </form>
+     <% include ../partials/navbar_registered.ejs %>
+     <div class="jumbotron text-center">
+     <div class="container">
+        <h1><%= title %></h1>
+        <p>Welcome, <%= userName %></p>
+        <br>
+        <form action="/upload" method="GET">
+        <div class="row row-fluid">
+        <div class="col-sm-4">
+        <div class="form-group">  
+        <input class="form-control button-primary" type="submit" value="Upload new photo">
+        </div></div></div>
+        </form>
+    </div>
+    </div>
   </body>
 </html>
